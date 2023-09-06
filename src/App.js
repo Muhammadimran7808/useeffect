@@ -1,23 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [num, setNum] = useState(1)
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(`https://hub.dummyapis.com/employee?noofRecords=${num}&idStarts=1001`)
+      const get = await response.json();
+      setData(get)
+    }
+    getData();
+
+    document.title = (`(${num}) employees fetch`)
+  }, [num])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <button onClick={() => setNum(num + 1)}>click me {num}</button>
+
+      {
+        data.map((elem, index) => {
+          return(
+            <div className='show-data' key={index}>
+              <h4>{elem.firstName}</h4>
+              <h4>{elem.lastName}</h4>
+              <h4>{elem.email}</h4>
+            </div>
+          )
+        })
+      }
     </div>
   );
 }
