@@ -1,14 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
+
+  const navLinkStyles = ({ isActive }) => {
+    return {
+      fontWeight: isActive ? "bold" : "normal",
+      color: isActive ? "#fff" : "rgb(220, 220, 220)",
+      textDecoration: isActive ? "none" : "underline"
+    };
+  };
+
   return (
     <div className='header'>
       <h1>useEffect</h1>
       <div>
-        <Link to={"/"}><h3>Home</h3></Link>
-        <Link to={"/about"}><h3>About</h3></Link>
-        <Link to={"/contact"}><h3>Contact us</h3></Link>
+        <NavLink className={"navElement"} style={navLinkStyles} to={'/'}>Home</NavLink>
+        <NavLink className={"navElement"} style={navLinkStyles} to={'/about'}>About</NavLink>
+        <NavLink className={"navElement"} style={navLinkStyles} to={"/contact"}>Contact us</NavLink>
       </div>
     </div>
   )
