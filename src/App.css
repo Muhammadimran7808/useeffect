@@ -32,3 +32,8 @@ button {
   padding: 8px 12px;
   margin-top: 5rem;
 }
+.contact{
+  display: inline-block;
+  margin: 1rem 5rem;
+  text-decoration: underline;
+}
